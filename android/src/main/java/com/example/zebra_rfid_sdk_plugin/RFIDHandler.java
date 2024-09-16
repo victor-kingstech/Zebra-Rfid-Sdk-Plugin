@@ -185,7 +185,7 @@ public class RFIDHandler implements Readers.RFIDReaderEventHandler {
                 reader.Events.setHandheldEvent(true);
                 // tag event with tag data
                 reader.Events.setTagReadEvent(true);
-                reader.Events.setAttachTagDataWithReadEvent(false);
+                reader.Events.setAttachTagDataWithReadEvent(true);
                 // set trigger mode as rfid so scanner beam will not come
                 reader.Config.setTriggerMode(ENUM_TRIGGER_MODE.RFID_MODE, true);
                 // set start and stop triggers
@@ -202,7 +202,8 @@ public class RFIDHandler implements Readers.RFIDReaderEventHandler {
                 // Set the singulation control
                 Antennas.SingulationControl s1_singulationControl = reader.Config.Antennas.getSingulationControl(1);
                 s1_singulationControl.setSession(SESSION.SESSION_S0);
-                s1_singulationControl.Action.setInventoryState(INVENTORY_STATE.INVENTORY_STATE_A);
+                s1_singulationControl.setTagPopulation((short) 30);
+                s1_singulationControl.Action.setInventoryState(INVENTORY_STATE.INVENTORY_STATE_AB_FLIP);
                 s1_singulationControl.Action.setSLFlag(SL_FLAG.SL_ALL);
                 reader.Config.Antennas.setSingulationControl(1, s1_singulationControl);
                 // delete any prefilters
